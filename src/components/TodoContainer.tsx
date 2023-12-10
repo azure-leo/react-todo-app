@@ -76,7 +76,7 @@ const TodoContainer = () => {
             </select>
             <div className="todo__list">
                 <button onClick={handleCreate}>Добавить новую задачу</button>
-                {filteredTodos && filteredTodos.map(todo =>
+                {filteredTodos && filteredTodos.map((todo: ITodo) =>
                     <TodoItem toggleStatus={handleToggleStatus} key={todo.id} todo={todo}/>
                 )}
 
