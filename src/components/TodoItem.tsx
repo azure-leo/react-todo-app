@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ITodo} from "../models/ITodo.ts";
+import {todoAPI} from "../services/TodoService.ts";
 
 interface TodoItemnProps {
     todo: ITodo,
@@ -7,26 +8,30 @@ interface TodoItemnProps {
 }
 
 const TodoItem : React.FC<TodoItemnProps> = ({todo, toggleStatus}) => {
-    // const {data: todos} = todoAPI.useFetchAllTodosQuery(15)
+    const {data: todos} = todoAPI.useFetchAllTodosQuery(15)
 
-    let isWaitingActivee = todo.status === 'Ожидание'
-    let isInProgressActivee = todo.status === 'В работе'
-    let isDoneActivee = todo.status === 'Выполнено'
+    const [isWaitingActive, setWaitingIsActive] = useState(todo.status === 'Ожидание');
+    const [isInProgressActive, setInProgressIsActive] = useState(todo.status === 'В работе');
+    const [isDoneActive, setDoneIsActive] = useState(todo.status === 'Выполнено');
+
+    // let isWaitingActivee = todo.status === 'Ожидание'
+    // let isInProgressActivee = todo.status === 'В работе'
+    // let isDoneActivee = todo.status === 'Выполнено'
 
     const handleToggleStatus = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         event.stopPropagation()
         if(event.currentTarget.innerText === 'Ожидание') {
-            isWaitingActivee = true
-            isDoneActivee = false
-            isInProgressActivee = false
+            setWaitingIsActive(true)
+            setDoneIsActive(false)
+            setInProgressIsActive(false)
         } else if(event.currentTarget.innerText === 'В работе') {
-            isInProgressActivee = true
-            isDoneActivee = false
-            isWaitingActivee = false
+            setInProgressIsActive(true)
+            setDoneIsActive(false)
+            setWaitingIsActive(false)
         } else if(event.currentTarget.innerText === 'Выполнено') {
-            isDoneActivee = true
-            isInProgressActivee = false
-            isWaitingActivee = false
+            setDoneIsActive(true)
+            setInProgressIsActive(false)
+            setWaitingIsActive(false)
         }
 
         const status = event.currentTarget.innerText || ""
@@ -40,11 +45,11 @@ const TodoItem : React.FC<TodoItemnProps> = ({todo, toggleStatus}) => {
             <div className="todo__list__description">
                 <div className={"todo__list__badge__container"}>
                     <span  onClick={handleToggleStatus} className={`todo__list__badge todo__waiting 
-                ${isWaitingActivee ? 'active' : ''}`}>Ожидание</span>
+                ${isWaitingActive ? 'active' : ''}`}>Ожидание</span>
                     <span onClick={handleToggleStatus} className={`todo__list__badge todo__waiting 
-                ${isInProgressActivee ? 'active' : ''}`}>В работе</span>
+                ${isInProgressActive ? 'active' : ''}`}>В работе</span>
                     <span onClick={handleToggleStatus} className={`todo__list__badge todo__waiting 
-                ${isDoneActivee ? 'active' : ''}`}>Выполнено</span>
+                ${isDoneActive ? 'active' : ''}`}>Выполнено</span>
 
                 </div>
 
