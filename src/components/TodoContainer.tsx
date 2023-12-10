@@ -13,6 +13,9 @@ const TodoContainer = () => {
 
     const [completedTodosCount, setCompletedTodosCount] = useState(0);
 
+    const [activeStatus, setActiveStatus] = useState('');
+    const { data: filteredTodos } = todoAPI.useFetchTodosByStatusQuery(activeStatus);
+
     useEffect(() => {
         if (todos) {
             const count = todos.filter((todo) => todo.status === 'Выполнено').length;
@@ -32,6 +35,13 @@ const TodoContainer = () => {
     const handleToggleStatus = (todo: ITodo) => {
         updateTodo(todo)
     }
+
+    // const filteredTodos = todos.filter((todo) => {
+    //     if (activeStatus === 'Выполнено') {
+    //         return todo.status === 'Выполнено';
+    //     }
+    //     return true; // Show all tasks for other statuses or when no status is selected
+    // });
 
     return (
         <div>
@@ -58,9 +68,15 @@ const TodoContainer = () => {
             <div className="todo__counter">
                 Выполнено задач: {completedTodosCount}
             </div>
+            <select value={activeStatus} onChange={(e) =>setActiveStatus(e.target.value)}>
+                <option value="">Все</option>
+                <option value="Выполнено">Выполнено</option>
+                <option value="В работе">В работе</option>
+                <option value="Ожидание">Ожидание</option>
+            </select>
             <div className="todo__list">
                 <button onClick={handleCreate}>Добавить новую задачу</button>
-                {todos && todos.map(todo =>
+                {filteredTodos && filteredTodos.map(todo =>
                     <TodoItem toggleStatus={handleToggleStatus} key={todo.id} todo={todo}/>
                 )}
 

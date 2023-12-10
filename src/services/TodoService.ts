@@ -33,7 +33,8 @@ export const todoAPI = createApi({
             invalidatesTags: ['Todo']
         }),
         fetchTodosByStatus: build.query({
-            query: (status) => `todos?status=${status}`
+            query: (status) => (status ? `todos?status=${status}` : 'todos'),
+            providesTags:()=>['Todo']
         }),
     })
 })
