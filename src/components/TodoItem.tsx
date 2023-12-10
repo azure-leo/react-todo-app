@@ -12,10 +12,6 @@ const TodoItem : React.FC<TodoItemnProps> = ({todo, toggleStatus}) => {
     const [isInProgressActive, setInProgressIsActive] = useState(todo.status === 'В работе');
     const [isDoneActive, setDoneIsActive] = useState(todo.status === 'Выполнено');
 
-    // let isWaitingActivee = todo.status === 'Ожидание'
-    // let isInProgressActivee = todo.status === 'В работе'
-    // let isDoneActivee = todo.status === 'Выполнено'
-
     const handleToggleStatus = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
         event.stopPropagation()
         if(event.currentTarget.innerText === 'Ожидание') {

@@ -14,7 +14,7 @@ export const todoAPI = createApi({
                     _limit: limit
                 }
             }),
-            // providesTags: result => ['Todo']
+            providesTags: result => ['Todo']
         }),
         createTodo: build.mutation<ITodo, ITodo>({
             query: ({title, description, status = 'Ожидание'}) => ({

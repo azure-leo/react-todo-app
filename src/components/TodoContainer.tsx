@@ -1,7 +1,7 @@
 import {todoAPI} from "../services/TodoService.ts";
 import TodoItem from "./TodoItem.tsx";
 import {ITodo} from "../models/ITodo.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const TodoContainer = () => {
     const [newTodo, setNewTodo] = useState(
@@ -11,11 +11,15 @@ const TodoContainer = () => {
 
     const [updateTodo, {}] = todoAPI.useUpdateTodoMutation()
 
-    const doneTodosCount = todos ? todos.filter((todo) => todo.status === 'Выполнено').length : 0
+    const [completedTodosCount, setCompletedTodosCount] = useState(0);
 
-    const { data : filteredTodos } = todoAPI.useFetchTodosByStatusQuery('Выполнено')
+    useEffect(() => {
+        if (todos) {
+            const count = todos.filter((todo) => todo.status === 'Выполнено').length;
+            setCompletedTodosCount(count)
+        }
+    }, [todos]);
 
-    console.log(filteredTodos)
 
     const handleCreate = async () => {
         if (newTodo.title.length <= 30) {
@@ -52,7 +56,7 @@ const TodoContainer = () => {
                 />
             </div>
             <div className="todo__counter">
-                Выполнено задач: {doneTodosCount}
+                Выполнено задач: {completedTodosCount}
             </div>
             <div className="todo__list">
                 <button onClick={handleCreate}>Добавить новую задачу</button>
