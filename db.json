@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Study React",
+      "description": "I have to study React, Redux, Redux toolkit!",
+      "status": "Выполнено"
+    },
+    {
+      "title": "Study",
+      "description": "Study React",
+      "status": "Выполнено",
+      "id": 2
+    },
+    {
+      "title": "newTask",
+      "description": "Read about redux mutations",
+      "status": "Выполнено",
+      "id": 3
+    }
+  ]
+}

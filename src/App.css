@@ -1,0 +1,88 @@
+:root {
+  --body-color: #34423f;
+  --white: #fff;
+  --grey: #cbd4e9;
+  --grey-light: #f8f9fc;
+  --grey-2: #dee1e1;
+  --grey-3: #ced4d3;
+  --grey-8: #5e706c;
+  --blue: #4c6bb6;
+  --blue-2: #688dc0;
+  --blue-light: #b8c5e2;
+  --blue-extra: #eaedf7;
+  --red: #db3851;
+  --red-light: #e8656f;
+  --green: #24a37e;
+  --green-light: #dff2ec;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.todo__list  {
+  width: 800px;
+  padding: 20px;
+}
+
+.todo__create {
+  padding: 20px;
+}
+
+.todo__counter {
+  padding: 20px;
+}
+
+.todo {
+  padding: 20px;
+  border: 1px solid teal;
+  border-radius: 20px;
+  margin-top: 15px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.todo__create__text-input {
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #eee;
+  border-radius:10px;
+  width:100%;
+}
+
+.todo__list__description {
+  padding: 30px;
+  /*border-left: 5px solid var(--blue);*/
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: relative;
+}
+
+.todo__list__badge__container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.active {
+  color: green;
+  background-color: lightgreen;
+}
+
+.todo__list__badge {
+  font-size: 14px;
+  line-height: 24px;
+  text-align: right;
+  color: var(--blue);
+  padding: 4px 12px;
+  /*background-color: var(--blue-extra);*/
+}
+
