@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {ITodo} from "../models/ITodo.ts";
-import {todoAPI} from "../services/TodoService.ts";
 
 interface TodoItemnProps {
     todo: ITodo,
@@ -8,7 +7,6 @@ interface TodoItemnProps {
 }
 
 const TodoItem : React.FC<TodoItemnProps> = ({todo, toggleStatus}) => {
-    const {data: todos} = todoAPI.useFetchAllTodosQuery(15)
 
     const [isWaitingActive, setWaitingIsActive] = useState(todo.status === 'Ожидание');
     const [isInProgressActive, setInProgressIsActive] = useState(todo.status === 'В работе');
